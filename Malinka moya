@@ -1,0 +1,103 @@
+from RPi import GPIO
+from time import sleep 
+GPIO.setmode(GPIO.BCM)
+a=[ 21, 20, 16, 12, 7, 8, 25, 24 ]
+GPIO.setup(a,GPIO.OUT)
+GPIO.output(a,0)
+
+def lightup(lednumber,period):
+    lednumber = a[lednumber]
+    GPIO.output(lednumber,True)
+    sleep(period)
+    GPIO.output(lednumber,False)
+    
+    
+    
+def blink(lednumber,blinkperiod,blinkcount):
+    lednumber = a[lednumber]
+    for i in range(blinkcount):
+        GPIO.output(lednumber,True)
+        sleep(blinkperiod)
+        GPIO.output(lednumber,False)
+        sleep(blinkperiod)
+    
+  
+        
+    
+    
+def runinglight(count,period):
+    for j in range(count):
+      for i in a:
+        GPIO.output(i,True)
+        sleep(period)
+        GPIO.output(i,False)
+        sleep(period)
+
+
+    
+    
+def runingdark(count,period):
+    GPIO.output(a,True)
+    for j in range(count):
+      for i in a:
+        GPIO.output(i,False)
+        sleep(period)
+        GPIO.output(i,True)
+        sleep(period)
+        
+
+def decToBinList(decNumber):
+    n=8
+    arr = [ ]    
+    for i in range(n):
+        arr.append(decNumber%2)
+        decNumber = decNumber//2
+    arr.reverse()
+    return arr
+    print(arr)
+    
+def lightnumbar(Number):
+    k= decToBinList(Number)
+    t=0
+    for i in a:
+        if k[t]==1:
+            GPIO.output(i,True)
+        else:
+            GPIO.output(i,False)
+        t=+1
+
+#def runningPattern(pattern, direction):
+ #   d=decToBinList(pattern)
+  #  print(d)
+    
+   # while 1:
+    #    t=0
+     #   for i in a:
+      #      if d[t]==1:
+       #       GPIO.output(i,True)
+        #    else:
+         #     GPIO.output(i,False)
+            
+          #  print(i,t,d[t])
+           # t=t+1
+       # print(d)
+        #d[::1]
+#runningPattern(10, 1)
+       
+       
+       
+
+runinglight(2,1)
+
+
+GPIO.cleanup()
+
+
+
+
+
+
+#runinglight(count,period)
+#runingdark(count,period)       
+#decToBinList(decNumber)
+#lightnumbar(Number)
