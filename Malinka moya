@@ -29,10 +29,14 @@ def runinglight(count,period):
     for j in range(count):
       for i in a:
         GPIO.output(i,True)
-        sleep(period)
+        if i == 26:
+            sleep(period)
+            GPIO.output(i,False)
+            break
+        GPIO.output(i+1,True)
         GPIO.output(i,False)
         sleep(period)
-
+    
 
     
     
